@@ -9,32 +9,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - run: pip install -r requirements.txt
-      - run: pytest
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: PYTHONPATH=. pytest   
 
   train-and-quantize:
     runs-on: ubuntu-latest
     needs: test-suite
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - run: pip install -r requirements.txt
-      - run: python src/train.py
-      - run: python src/quantize.py
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Train model
+        run: PYTHONPATH=. python -m src.train   
+
+      - name: Quantize model
+        run: PYTHONPATH=. python -m src.quantize  
 
   docker-build:
     runs-on: ubuntu-latest
     needs: train-and-quantize
     steps:
       - uses: actions/checkout@v3
+
       - name: Build Docker Image
         run: docker build -t mlops-linear .
+
       - name: Run Docker Container
         run: docker run mlops-linear
