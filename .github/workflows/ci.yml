@@ -1,0 +1,40 @@
+name: MLOps Linear Regression
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - run: pytest
+
+  train-and-quantize:
+    runs-on: ubuntu-latest
+    needs: test-suite
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - run: python src/train.py
+      - run: python src/quantize.py
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: train-and-quantize
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker Image
+        run: docker build -t mlops-linear .
+      - name: Run Docker Container
+        run: docker run mlops-linear
