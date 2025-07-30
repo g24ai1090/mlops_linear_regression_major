@@ -53,8 +53,15 @@ Model trained successfully
 python src/quantize.py
 Result:
 ----------------------------
- Model parameters quantized successfully
-Dequantized coefficients (sample): [ 0.44433486  0.0053134  -0.12352985  0.78314495 -0.00423053]
+Model parameters quantized successfully
+Dequantized coefficients (sample): [ 4.4867492e-01  9.7242575e-03 -1.2332334e-01  7.8314489e-01
+ -2.0296206e-06]
+
+Model Comparison Table
+| Model Version   | File Size (KB) | R² Score | Mean Squared Error |
+|-----------------|----------------|----------|--------------------|
+| Unquantized     | 1.07 KB   | 0.5758   | 0.5559 |
+| Quantized       | 0.64 KB   | 0.5755   | 0.5563 |
 -------------------------------------------
 
 python src/predict.py
@@ -88,9 +95,10 @@ setup docker_username and docker_password keys going inside settings->actions->r
 
 This would trigger action workflow in github
 
-Model Comparison table
 
+Model Comparison Table
 | Model Version   | File Size (KB) | R² Score | Mean Squared Error |
-|----------------|----------------|----------|--------------------|
-| Unquantized    | 1.07 KB   | 0.5758   | 0.5559 |
-| Quantized      | 0.54 KB   | 0.5758   | 0.5559 |
+|-----------------|----------------|----------|--------------------|
+| Unquantized     | 1.07 KB   | 0.5758   | 0.5559 |
+| Quantized       | 0.64 KB   | 0.5755   | 0.5563 |
+
