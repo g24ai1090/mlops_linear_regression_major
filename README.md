@@ -90,7 +90,7 @@ This would trigger action workflow in github
 
 Model Comparison table
 
-Model Version	|   File Size (KB)      |	R² Score	    |   Mean Squared Error
-----------------------------------------------------------------------------------------
-Unquantized	    |    1.1 K  |	0.5758	|    0.5559
-Quantized	    |     521B	|    0.5758 |	0.5559
+| Model Version   | File Size (KB) | R² Score | Mean Squared Error |
+|----------------|----------------|----------|--------------------|
+| Unquantized    | 1.07 KB   | 0.5758   | 0.5559 |
+| Quantized      | 0.54 KB   | 0.5758   | 0.5559 |
