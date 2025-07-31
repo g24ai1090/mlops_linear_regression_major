@@ -53,15 +53,16 @@ Model trained successfully
 python src/quantize.py
 Result:
 ----------------------------
-Model parameters quantized successfully
-Dequantized coefficients (sample): [ 4.4867492e-01  9.7242575e-03 -1.2332334e-01  7.8314489e-01
- -2.0296206e-06]
+Model parameters quantized successfully (8-bit per-coefficient & 16-bit global)
 
-Model Comparison Table
-| Model Version   | File Size (KB) | R² Score | Mean Squared Error |
-|-----------------|----------------|----------|--------------------|
-| Unquantized     | 1.07 KB   | 0.5758   | 0.5559 |
-| Quantized       | 0.64 KB   | 0.5755   | 0.5563 |
+ Full Model Comparison Table
+| Version              | R² Score | MSE       | MAE       | Sample Predictions |
+|----------------------|----------|-----------|-----------|-------------------|
+| Sklearn (Unquantized) | 0.5758   | 0.5559 | 0.5332 | [0.72 1.76 2.71 2.84 2.6 ] |
+| 8-bit Quantized      | -1163.9826   | 1526.6037 | 39.0550 | [-37. -37. -37. -37. -37.] |
+| 8-bit Dequantized    | 0.5755   | 0.5563 | 0.5374 | [0.74 1.79 2.73 2.86 2.63] |
+| 16-bit Quantized     | -1412345340153625.2500   | 1850750014114009.2500 | 34330109.7525 | [33443734.05 37641244.48 32208848.45 40777644.94 26061583.97] |
+| 16-bit Dequantized   | 0.5756   | 0.5561 | 0.5340 | [0.72 1.77 2.71 2.84 2.61] |
 -------------------------------------------
 
 python src/predict.py
@@ -95,10 +96,13 @@ setup docker_username and docker_password keys going inside settings->actions->r
 
 This would trigger action workflow in github
 
+Model parameters quantized successfully (8-bit per-coefficient & 16-bit global)
 
-Model Comparison Table
-| Model Version   | File Size (KB) | R² Score | Mean Squared Error |
-|-----------------|----------------|----------|--------------------|
-| Unquantized     | 1.07 KB   | 0.5758   | 0.5559 |
-| Quantized       | 0.64 KB   | 0.5755   | 0.5563 |
-
+ Full Model Comparison Table
+| Version              | R² Score | MSE       | MAE       | Sample Predictions |
+|----------------------|----------|-----------|-----------|-------------------|
+| Sklearn (Unquantized) | 0.5758   | 0.5559 | 0.5332 | [0.72 1.76 2.71 2.84 2.6 ] |
+| 8-bit Quantized      | -1163.9826   | 1526.6037 | 39.0550 | [-37. -37. -37. -37. -37.] |
+| 8-bit Dequantized    | 0.5755   | 0.5563 | 0.5374 | [0.74 1.79 2.73 2.86 2.63] |
+| 16-bit Quantized     | -1412345340153625.2500   | 1850750014114009.2500 | 34330109.7525 | [33443734.05 37641244.48 32208848.45 40777644.94 26061583.97] |
+| 16-bit Dequantized   | 0.5756   | 0.5561 | 0.5340 | [0.72 1.77 2.71 2.84 2.61] |
